@@ -1,7 +1,11 @@
 const assert = require('assert')
+const http = require('http')
 const server = require('./server')
 
-request = {}
-response = {}
+srv = server.create()
+srv.listen(() => {
+    console.log('Started listening on ', srv.address())
 
-result = server.request_listener(request, response)
+    // TODO: run tests.
+    srv.close()
+})

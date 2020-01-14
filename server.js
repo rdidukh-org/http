@@ -1,14 +1,13 @@
-const url = require('url');
+const http = require('http')
 
-function _request_listener(req, res) {
-    console.log(req.url)
-    console.log(req.trailers)
-    console.log('')
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(req.url);
-    res.end();
+function create() {
+    return http.createServer((req, res) => {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(req.url);
+        res.end();
+    });
 }
 
 module.exports = { 
-    request_listener: _request_listener
+    create: create
 }
