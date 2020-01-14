@@ -9,5 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: ./test.sh
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: NodeJS tests
+      run: find . -name *_test.js | xargs node
