@@ -12,6 +12,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 10.x
-    - run: npm install mocha    
+    - run: npm install
+    - name: lint
+      run: npm run lint
     - name: npm test
       run: npm test
