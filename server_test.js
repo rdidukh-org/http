@@ -1,11 +1,25 @@
 const assert = require('assert')
 const http = require('http')
 const server = require('./server')
+const url = require('url')
 
-srv = server.create()
-srv.listen(() => {
-    console.log('Started listening on ', srv.address())
+describe('server', function () {
+    it('starts', function (done) {
+        srv = server.create()
 
-    // TODO: run tests.
-    srv.close()
+        srv.listen(0, 'localhost', () => {
+            const srvUrl = new url.URL('http://' + srv.address().address + ':' + srv.address().port + '/')
+
+            http.get(srvUrl, function (res) {
+                srv.close()
+                done()
+            }).on('error', (e) => {
+                srv.close()
+                done(e)
+            })            
+        }).on('error', function (err) {
+            srv.close()
+            done(err)
+        })
+    })
 })
