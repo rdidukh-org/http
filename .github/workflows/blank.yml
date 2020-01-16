@@ -12,5 +12,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 10.x
-    - name: NodeJS tests
-      run: find . -name *_test.js | xargs node
+    - run: npm install
+    - name: lint
+      run: npm run lint
+    - name: npm test
+      run: npm test
